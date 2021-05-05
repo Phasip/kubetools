@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  schedule:
+  - cron: "0 6 * * 3"
+
+jobs:
+  build:
+    env:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    - name: Autochange
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        date > .github/.ignoreme
+        git add ".github/.ignoreme"
+        git commit -m "Update datelog" -a
+        git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${GITHUB_REF} --follow-tags
