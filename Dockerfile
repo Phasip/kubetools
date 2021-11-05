@@ -14,8 +14,8 @@ RUN git clone https://github.com/cyberark/KubiScan.git /KubiScan
 RUN echo "alias kubiscan='python3 /KubiScan/KubiScan.py'" > /root/.bash_aliases
 
 # krew
-ADD https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz /tmp
-RUN cd /tmp && tar zxvf /tmp/krew.tar.gz && ./krew-linux_amd64 install krew
+ADD https://github.com/kubernetes-sigs/krew/releases/latest/download/krew-linux_amd64.tar.gz /tmp
+RUN cd /tmp && tar zxvf /tmp/krew-linux_amd64.tar.gz && ./krew-linux_amd64 install krew
 RUN echo 'export PATH="${PATH}:${HOME}/.krew/bin"' >> /root/.bashrc
 
 # raccess
