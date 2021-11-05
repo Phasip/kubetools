@@ -26,7 +26,7 @@ jobs:
     - name: Login and Build
       run: |
         docker login -u ${USER} -p ${TOKEN}
-        docker build . --file Dockerfile --tag ${USER}/kubetools:$(date +%s)
+        docker build . --file Dockerfile --tag ${USER}/kubetools:latest --tag ${USER}/kubetools:$(date +%s)
     - name: Push
       run: |
         docker push ${USER}/kubetools
