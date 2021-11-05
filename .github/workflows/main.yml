@@ -25,9 +25,9 @@ jobs:
         git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${GITHUB_REF} --follow-tags
     - name: Login and Build
       run: |
-        docker login -u $USER -p $TOKEN
-        docker build . --file Dockerfile --tag phasip/kubetools:$(date +%s)
+        docker login -u ${USER} -p ${TOKEN}
+        docker build . --file Dockerfile --tag ${USER}/kubetools:$(date +%s)
     - name: Push
       run: |
-        docker push $USER/kubetools
+        docker push ${USER}/kubetools
           
