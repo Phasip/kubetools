@@ -7,7 +7,8 @@ on:
 jobs:
   build:
     env:
-      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      USER: ${{ secrets.DOCKER_USERNAME }}
+      TOKEN: ${{ secrets.DOCKER_TOKEN }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -22,3 +23,11 @@ jobs:
         git add ".github/.ignoreme"
         git commit -m "Update datelog" -a
         git push "https://${GITHUB_ACTOR}:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${GITHUB_REF} --follow-tags
+    - name: Login and Build
+      run: |
+        docker login -u $USER -p $TOKEN
+        docker build . --file Dockerfile --tag phasip/kubetools:$(date +%s)
+    - name: Push
+      run: |
+        docker push $USER/kubetools
+          
