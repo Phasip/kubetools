@@ -26,7 +26,7 @@ RUN /bin/bash -ci 'kubectl krew install access-matrix'
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install wget vim nmap less arp-scan curl \
 	dnsutils dsniff iproute2 iputils-ping jq net-tools netcat-traditional \
 	openssh-client procps socat tcpdump traceroute libcap2-bin smbclient \
-	libnfs-utils
+	libnfs-utils docker.io
 
 # kube-hunter
 RUN pip3 install kube-hunter
