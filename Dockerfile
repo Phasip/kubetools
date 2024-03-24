@@ -2,7 +2,9 @@ FROM ubuntu:latest
 # kubectl
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install curl apt-transport-https gnupg
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" > /etc/apt/sources.list.d/kubernetes.list
+
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install kubelet kubeadm kubectl
 
 # KubiScan
