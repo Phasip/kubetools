@@ -10,8 +10,8 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install kubelet kubeadm 
 # KubiScan
 RUN apt update && \
 	DEBIAN_FRONTEND=noninteractive apt install -y python3 git python3-pip
-RUN pip3 install kubernetes
-RUN pip3 install PTable
+RUN pip3 install --break-system-packages kubernetes
+RUN pip3 install --break-system-packages PTable
 RUN git clone https://github.com/cyberark/KubiScan.git /KubiScan
 RUN echo "alias kubiscan='python3 /KubiScan/KubiScan.py'" > /root/.bash_aliases
 
@@ -31,7 +31,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install wget vim nmap le
 	libnfs-utils docker.io
 
 # kube-hunter
-RUN pip3 install kube-hunter
+RUN pip3 install --break-system-packages kube-hunter
 
 # kube bench
 COPY --from=aquasec/kube-bench:latest /usr/local/bin/kube-bench /usr/local/bin/kube-bench
