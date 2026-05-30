@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 # kubectl
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install curl apt-transport-https gnupg
+RUN mkdir -p /etc/apt/keyrings
 RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" > /etc/apt/sources.list.d/kubernetes.list
 
